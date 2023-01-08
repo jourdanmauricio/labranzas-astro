@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon';
+---
+
+<header
+  class="sticky top-0 w-full h-12 bg-gray-700 md:hidden flex justify-between items-center px-5"
+>
+  <Icon
+    id="menu"
+    class="text-gray-100 w-8 hover:cursor-pointer"
+    name="mdi:menu"
+  />
+  <span class="text-gray-100 text-2xl sm:text-3xl">Labranzas</span>
+  <button
+    class="p-2 rounded-full transition duration-300 ease-in-out hover:hover:bg-gray-600"
+  >
+    <Icon class="w-6 inline text-gray-100" name="mdi:cart-outline" />
+  </button>
+
+  <nav
+    id="menu-container"
+    class="opacity-0 transition-opacity duration-500 ease-out bg-gray-700 text-gray-100 absolute top-12 -left-0"
+  >
+    <ul>
+      <li
+        class="px-6 py-3 hover:bg-gray-600 transition duration-300 ease-in-out"
+      >
+        <a href="#">Inicio</a>
+      </li>
+      <li
+        class="px-6 py-3 hover:bg-gray-600 transition duration-300 ease-in-out"
+      >
+        <a href="#">Centros de mesa</a>
+      </li>
+      <li
+        class="px-6 py-3 hover:bg-gray-600 transition duration-300 ease-in-out"
+      >
+        <a href="#">Souvenirs</a>
+      </li>
+      <li
+        class="px-6 py-3 hover:bg-gray-600 transition duration-300 ease-in-out"
+      >
+        <a href="#">Hogar</a>
+      </li>
+      <li
+        class="px-6 py-3 hover:bg-gray-600 transition duration-300 ease-in-out"
+      >
+        <a href="#">Contacto</a>
+      </li>
+      <li
+        class="px-6 py-3 hover:bg-gray-600 transition duration-300 ease-in-out"
+      >
+        <a href="#">Cómo comprar?</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script is:inline>
+  const menu = document.getElementById('menu');
+  const containerMenu = document.getElementById('menu-container');
+  menu.addEventListener('click', () => {
+    containerMenu.classList.toggle('opacity-100');
+  });
+  window.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!containerMenu.contains(e.target) && !menu.contains(e.target)) {
+      if (containerMenu.classList.contains('opacity-100')) {
+        containerMenu.classList.remove('opacity-100');
+      }
+    }
+  });
+</script>
