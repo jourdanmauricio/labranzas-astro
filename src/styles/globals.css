@@ -18,8 +18,39 @@
     scroll-behavior: smooth;
   }
   body {
-    max-width: 1200px;
-    margin: 0 auto;
+    @apply max-w-screen-xl my-0 mx-auto bg-gray-100;
+  }
+}
+
+@layer components {
+  /* PRODUCT */
+  .card {
+    @apply p-4 bg-white text-gray-700 w-72 min-h-[20rem] shadow-lg rounded-md overflow-hidden;
+  }
+  .badge {
+    @apply mt-2 px-3 py-1 rounded-full text-xs bg-gray-100;
+  }
+  .product-title {
+    @apply text-lg overflow-ellipsis;
+  }
+  .discount-percent {
+    @apply bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white;
+  }
+  .button-primary {
+    @apply bg-gray-700/80 hover:bg-gray-700/90 px-2 py-2 rounded-md text-white tracking-wider transition;
+  }
+  .button-icon {
+    @apply flex flex-grow justify-center items-center rounded-md bg-gray-300/60 hover:bg-gray-300/80 transition;
+  }
+  /* DIVIDER */
+  .divider-container {
+    @apply relative flex py-5 items-center;
+  }
+  .divider-line {
+    @apply flex-grow border-t border-gray-500;
+  }
+  .divider-content {
+    @apply flex-shrink mx-4 text-gray-500;
   }
 }
 

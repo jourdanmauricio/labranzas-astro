@@ -1,4 +1,5 @@
 ---
+import Card from '../components/Card.astro';
 import Menu from '../components/menu/Menu.astro';
 import MenuMobile from '../components/menu/MenuMobile.astro';
 import Layout from '../layouts/Layout.astro';
@@ -17,6 +18,22 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <Menu />
+  <div class="divider-container">
+    <div class="divider-line"></div>
+    <span class="divider-content">Últimas publicaciones</span>
+    <div class="divider-line"></div>
+  </div>
+  <section
+    class="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center"
+  >
+    <Card />
+    <Card />
+    <Card />
+    <!-- <Card />
+    <Card />
+    <Card />
+    <Card /> -->
+  </section>
   <section class="px-4 flex flex-col justify-center items-center">
     <article class="article">
       <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">
