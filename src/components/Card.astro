@@ -1,13 +1,17 @@
 ---
 import { Icon } from 'astro-icon';
+
+const { product } = Astro.props;
+console.log('product', product);
 ---
 
 <div class="card">
   <img
     class="w-full rounded-md border border-gray-100 object-cover"
-    src="/images/aspiradora.jpg"
+    src={product.THUMBNAIL.replace('I', 'O')}
     alt=""
   />
+  <!-- src="/images/aspiradora.jpg" -->
   <div class="flex flex-col gap-3">
     <div class="flex items-center gap-2">
       <!-- Badge -->
@@ -16,13 +20,14 @@ import { Icon } from 'astro-icon';
     </div>
     <!-- Title -->
     <h2 class="product-title" title="La mejor aspiradora">
-      La mejor aspiradora del mercado. Garantía de fábrica ... ...
+      <!-- La mejor aspiradora del mercado. Garantía de fábrica ... ... -->
+      {product.TITLE}
     </h2>
     <!-- Price -->
     <div class="flex justify-between items-center gap-2 mt-1">
       <span class="text-sm line-through opacity-50"> $50000</span>
       <span class="discount-percent">20% off</span>
-      <span class="text-xl font-bold">$45500</span>
+      <span class="text-xl font-bold">{product.PRICE}</span>
     </div>
     <!-- Action buttons -->
     <div class="mt-5 flex gap-2">

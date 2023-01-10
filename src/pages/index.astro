@@ -3,6 +3,24 @@ import Card from '../components/Card.astro';
 import Menu from '../components/menu/Menu.astro';
 import MenuMobile from '../components/menu/MenuMobile.astro';
 import Layout from '../layouts/Layout.astro';
+
+interface productsFeatures {
+  id: number;
+  prod_id: number;
+  new_product: boolean;
+  featured: boolean;
+  best_sellers: boolean;
+  tren: boolean;
+  price: number;
+  available_quantity: number;
+  title: string;
+  thumbnail: string;
+  seller_custom_field: string;
+}
+
+const data = await fetch(`${import.meta.env.VITE_BACKEND_API}/productsweb`);
+const products = await data.json();
+console.log('Products', products);
 ---
 
 <Layout>
@@ -26,9 +44,7 @@ import Layout from '../layouts/Layout.astro';
   <section
     class="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center"
   >
-    <Card />
-    <Card />
-    <Card />
+    {products.map((product: productsFeatures) => <Card product={product} />)}
     <!-- <Card />
     <Card />
     <Card />
