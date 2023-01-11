@@ -9,9 +9,9 @@ interface productsFeatures {
   id: number;
   prod_id: number;
   new_product: string;
-  featured: boolean;
-  best_sellers: boolean;
-  tren: boolean;
+  featured: string;
+  best_sellers: string;
+  tren: string;
   price: number;
   available_quantity: number;
   title: string;
@@ -21,10 +21,17 @@ interface productsFeatures {
 
 const data = await fetch(`${import.meta.env.VITE_BACKEND_API}/productsweb`);
 const products = await data.json();
-console.log('Products', products);
 
 const newProducts = products.filter(
   (prod: productsFeatures) => prod.new_product === '1'
+);
+
+const bestSellers = products.filter(
+  (prod: productsFeatures) => prod.best_sellers === '1'
+);
+
+const featured = products.filter(
+  (prod: productsFeatures) => prod.featured === '1'
 );
 ---
 
@@ -41,117 +48,101 @@ const newProducts = products.filter(
   </div>
 
   <Menu />
-  <h1 class="mt-16 text-xl font-semibold text-center text-gray-900">
-    Labranzas Tienda Online - Decoración para el hogar e insumos para eventos
+  <h1 class="mt-16 text-2xl font-semibold text-center text-gray-900">
+    Labranzas Tienda Online
   </h1>
 
-  <section class="py-16">
-    <Divider text="Últimas publicaciones" />
+  <h2 class="pt-2 text-xl text-center text-gray-900">
+    Decoración para el hogar e insumos para eventos
+  </h2>
 
-    <div
-      class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center"
-    >
-      {
-        newProducts.map((product: productsFeatures) => (
-          <Card product={product} />
-        ))
-      }
-    </div>
-  </section>
+  {
+    newProducts.length > 0 && (
+      <section class="py-16">
+        <Divider text="Últimas publicaciones" />
+
+        <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
+          {newProducts.map((product: productsFeatures) => (
+            <Card product={product} />
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <section class="py-16 bg-white">
-    <div class="p-8 flex flex-col items-center md:flex-row gap-8">
-      <article
-        class="flex flex-col gap-4 basis-1/2 text-gray-800 leading-5 tracking-wider"
-      >
-        <h2 class="text-center text-xl font-medium">
-          Decoración para el hogar
-        </h2>
-        <p>
-          Cumpleaños de 15, casamientos, eventos empresariales, regalos fin de
-          año, etc. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Magnam facilis assumenda, dolores quo atque iusto sapiente ullam
-          itaque nam ducimus dicta suscipit delectus dignissimos eos quas alias,
-          consequuntur et a.
-        </p>
-        <ul>
-          <li>Almohadones</li>
-          <li>Espejos</li>
-          <li>Centros de mesa</li>
-          <li>Decoración del salón</li>
-        </ul>
-      </article>
-
-      <article class="basis-1/2">
-        <div class="relative">
-          <img
-            class="rounded-md"
-            src="/images/candle_640_opt.jpg"
-            alt="Productos decoración para el hogar"
-          />
-
-          <button
-            class="w-2/3 absolute py-2 border-2 bg-white bg-opacity-60 hover:bg-opacity-40 border-purple-600 text-purple-600 rounded-md left-1/2 -translate-x-1/2 top-2/3"
-            >Ver productos</button
-          >
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="py-16">
-    <Divider text="Más vendidos" />
-
-    <div
-      class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center"
+    <article
+      class="w-3/4 flex flex-col gap-6 items-center justify-center mx-auto"
     >
-      {products.map((product: productsFeatures) => <Card product={product} />)}
-    </div>
+      <h2 class="text-xl font-medium">Decoración para el hogar</h2>
+      <p>
+        Cumpleaños de 15, casamientos, eventos empresariales, regalos fin de
+        año, etc. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Magnam facilis assumenda, dolores quo atque iusto sapiente ullam itaque
+        nam ducimus dicta suscipit delectus dignissimos eos quas alias,
+        consequuntur et a.
+      </p>
+      <ul>
+        <li>Centros de mesa</li>
+        <li>Souvenirs</li>
+        <li>Caminos de mesa</li>
+        <li>Decoración del salón</li>
+      </ul>
+      <button
+        class="py-2 px-20 border-2 bg-white hover:bg-purple-200 border-purple-600 text-purple-600 transition ease-in-out delay-150"
+        >Ver productos</button
+      >
+    </article>
   </section>
 
+  {
+    bestSellers.length > 0 && (
+      <section class="py-16">
+        <Divider text="Más vendidos" />
+
+        <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
+          {bestSellers.map((product: productsFeatures) => (
+            <Card product={product} />
+          ))}
+        </div>
+      </section>
+    )
+  }
   <section class="py-16 bg-white">
-    <div class="p-8 flex items-center flex-col md:flex-row gap-8">
-      <article class="basis-1/2">
-        <div class="relative">
-          <img
-            class="rounded-md"
-            src="/images/eventos_640_opt.jpg"
-            alt="Productos para eventos"
-          />
-          <button
-            class="w-2/3 absolute py-2 border-2 bg-white bg-opacity-60 hover:bg-opacity-40 border-purple-600 text-purple-600 rounded-md left-1/2 -translate-x-1/2 top-2/3"
-            >Ver productos</button
-          >
-        </div>
-      </article>
-
-      <article
-        class="flex flex-col gap-4 basis-1/2 leading-5 tracking-wider text-gray-800"
-      >
-        <h2 class="text-center text-xl font-medium">Insumos para eventos</h2>
-        <p>
-          Cumpleaños de 15, casamientos, eventos empresariales, regalos fin de
-          año, etc. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Magnam facilis assumenda, dolores quo atque iusto sapiente ullam
-          itaque nam ducimus dicta suscipit delectus dignissimos eos quas alias,
-          consequuntur et a.
-        </p>
-        <ul>
-          <li>Centros de mesa</li>
-          <li>Souvenirs</li>
-          <li>Caminos de mesa</li>
-          <li>Decoración del salón</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="py-16">
-    <Divider text="Destacados" />
-    <div
-      class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center"
+    <article
+      class="w-3/4 flex flex-col gap-6 items-center justify-center mx-auto"
     >
-      {products.map((product: productsFeatures) => <Card product={product} />)}
-    </div>
+      <h2 class="text-xl font-medium">Insumos para eventos</h2>
+      <p>
+        Cumpleaños de 15, casamientos, eventos empresariales, regalos fin de
+        año, etc. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Magnam facilis assumenda, dolores quo atque iusto sapiente ullam itaque
+        nam ducimus dicta suscipit delectus dignissimos eos quas alias,
+        consequuntur et a.
+      </p>
+      <ul>
+        <li>Centros de mesa</li>
+        <li>Souvenirs</li>
+        <li>Caminos de mesa</li>
+        <li>Decoración del salón</li>
+      </ul>
+      <button
+        class="py-2 px-20 border-2 bg-white hover:bg-purple-200 border-purple-600 text-purple-600 transition ease-in-out delay-150"
+        >Ver productos</button
+      >
+    </article>
   </section>
+
+  {
+    featured.length > 0 && (
+      <section class="py-16">
+        <Divider text="Destacados" />
+        <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
+          {featured.map((product: productsFeatures) => (
+            <Card product={product} />
+          ))}
+        </div>
+      </section>
+    )
+  }
 </Layout>
