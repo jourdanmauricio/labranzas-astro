@@ -6,11 +6,23 @@ console.log('product', product);
 ---
 
 <div class="card">
-  <img
-    class="w-full rounded-md border border-gray-100 object-cover"
-    src={product.THUMBNAIL.replace('I', 'O')}
-    alt=""
-  />
+  <div class="bg-white py-6 flex justify-center items-center">
+    <img
+      class="w-48 h-48 object-cover hover:scale-110 transition-all duration-500 ease-in-out transform"
+      src={product.thumbnail.replace('I', 'C')}
+      alt=""
+    />
+  </div>
+  <!-- Action buttons -->
+  <div class="absolute top-1 right-6 mt-5 flex flex-col gap-3">
+    <button class="button-icon"
+      ><Icon class="w-6 h-6 opacity-50" name="mdi:cards-heart" /></button
+    >
+    <button class="button-icon"
+      ><Icon class="w-6 h-6 opacity-50" name="mdi:eye" /></button
+    >
+  </div>
+
   <!-- src="/images/aspiradora.jpg" -->
   <div class="flex flex-col gap-3">
     <div class="flex items-center gap-2">
@@ -19,25 +31,16 @@ console.log('product', product);
       <span class="badge">Oficial store</span>
     </div>
     <!-- Title -->
-    <h2 class="product-title" title="La mejor aspiradora">
+    <h2 class="product-title" title={product.title}>
       <!-- La mejor aspiradora del mercado. Garantía de fábrica ... ... -->
-      {product.TITLE}
+      {product.title}
     </h2>
     <!-- Price -->
     <div class="flex justify-between items-center gap-2 mt-1">
       <span class="text-sm line-through opacity-50"> $50000</span>
       <span class="discount-percent">20% off</span>
-      <span class="text-xl font-bold">{product.PRICE}</span>
+      <span>${product.price}</span>
     </div>
-    <!-- Action buttons -->
-    <div class="mt-5 flex gap-2">
-      <button class="button-primary">Agregar al carrito</button>
-      <button class="button-icon"
-        ><Icon class="w-6 opacity-50" name="mdi:cards-heart" /></button
-      >
-      <button class="button-icon"
-        ><Icon class="w-6 opacity-50" name="mdi:eye" /></button
-      >
-    </div>
+    <button class="button-primary">Agregar al carrito</button>
   </div>
 </div>
