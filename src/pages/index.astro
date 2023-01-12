@@ -1,5 +1,5 @@
 ---
-import Card from '../components/Card.astro';
+import Card from '../components/Card/Card';
 import Divider from '../components/Divider.astro';
 import Menu from '../components/menu/Menu.astro';
 import MenuMobile from '../components/menu/MenuMobile.astro';
@@ -11,7 +11,7 @@ interface productsFeatures {
   new_product: string;
   featured: string;
   best_sellers: string;
-  tren: string;
+  trend: string;
   price: number;
   available_quantity: number;
   title: string;
@@ -33,6 +33,8 @@ const bestSellers = products.filter(
 const featured = products.filter(
   (prod: productsFeatures) => prod.featured === '1'
 );
+
+const trend = products.filter((prod: productsFeatures) => prod.trend === '1');
 ---
 
 <Layout>
@@ -46,8 +48,8 @@ const featured = products.filter(
       <h3 class="text-white">Decoración para el hogar</h3>
     </div>
   </div>
-
   <Menu />
+
   <h1 class="mt-16 text-2xl font-semibold text-center text-gray-900">
     Labranzas Tienda Online
   </h1>
@@ -63,7 +65,7 @@ const featured = products.filter(
 
         <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
           {newProducts.map((product: productsFeatures) => (
-            <Card product={product} />
+            <Card product={product} client:load />
           ))}
         </div>
       </section>
@@ -102,7 +104,7 @@ const featured = products.filter(
 
         <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
           {bestSellers.map((product: productsFeatures) => (
-            <Card product={product} />
+            <Card product={product} client:load />
           ))}
         </div>
       </section>
@@ -139,7 +141,20 @@ const featured = products.filter(
         <Divider text="Destacados" />
         <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
           {featured.map((product: productsFeatures) => (
-            <Card product={product} />
+            <Card product={product} client:load />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    trend.length > 0 && (
+      <section class="py-16">
+        <Divider text="Tendencia" />
+        <div class="text-center p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-16 place-items-center">
+          {trend.map((product: productsFeatures) => (
+            <Card client:load product={product} />
           ))}
         </div>
       </section>

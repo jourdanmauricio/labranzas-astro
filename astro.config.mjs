@@ -4,7 +4,12 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
+import react from "@astrojs/react";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()],
-  server: { port: 3002 },
+  integrations: [tailwind(), react()],
+  server: {
+    port: 3002
+  }
 });

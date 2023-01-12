@@ -1,7 +1,10 @@
 ---
+import FavoritesFlyout from '../FavoritesFlyout';
+import FavoritesButton from './FavoritesButton';
 import { Icon } from 'astro-icon';
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
+// import { isFavoritesOpen } from '../../stores/favorites';
 ---
 
 <header
@@ -22,7 +25,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
       <!-- Submenu -->
       <div class="group inline-block">
         <li
-          class={`hover:bg-gray-600 p-4 transition duration-300 ease-in-out group  relative ${
+          class={`hover:bg-gray-600 p-4 transition duration-300 ease-in-out group relative ${
             currentPath === 'productos' ? 'bg-gray-900' : ''
           }`}
         >
@@ -70,11 +73,13 @@ const currentPath = pathname.slice(1); // remove the first "/"
     </ul>
   </nav>
   <div>
-    <button
+    <!-- <button
+      id="btn-favorite"
       class="p-2 rounded-full transition duration-300 ease-in-out hover:hover:bg-gray-600"
     >
       <Icon class="w-6 inline text-gray-100" name="mdi:cards-heart" />
-    </button>
+    </button> -->
+    <FavoritesButton client:only />
 
     <button
       class="p-2 rounded-full transition duration-300 ease-in-out hover:hover:bg-gray-600"
@@ -82,4 +87,5 @@ const currentPath = pathname.slice(1); // remove the first "/"
       <Icon class="w-6 inline text-gray-100" name="mdi:cart-outline" />
     </button>
   </div>
+  <FavoritesFlyout client:only />
 </header>
