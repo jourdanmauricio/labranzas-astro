@@ -1,10 +1,10 @@
 ---
 import FavoritesFlyout from '../FavoritesFlyout';
 import FavoritesButton from './FavoritesButton';
+import LoginButton from './LoginButton';
 import { Icon } from 'astro-icon';
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
-// import { isFavoritesOpen } from '../../stores/favorites';
 ---
 
 <header
@@ -73,12 +73,13 @@ const currentPath = pathname.slice(1); // remove the first "/"
     </ul>
   </nav>
   <div>
-    <!-- <button
-      id="btn-favorite"
-      class="p-2 rounded-full transition duration-300 ease-in-out hover:hover:bg-gray-600"
+    <!-- <a
+      href="#"
+      class="p-1 border border-gray-100 transition duration-300 ease-in-out hover:hover:bg-gray-600"
     >
-      <Icon class="w-6 inline text-gray-100" name="mdi:cards-heart" />
-    </button> -->
+      <span class="text-gray-100 px-4">Iniciar sesión</span>
+    </a> -->
+    <LoginButton client:only />
     <FavoritesButton client:only />
 
     <button

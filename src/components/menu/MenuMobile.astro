@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon';
 import FavoritesButton from './FavoritesButton';
 import FavoritesFlyout from '../FavoritesFlyout';
+import LoginButton from './LoginButton';
 ---
 
 <header
@@ -12,8 +13,10 @@ import FavoritesFlyout from '../FavoritesFlyout';
     class="text-gray-100 w-8 hover:cursor-pointer"
     name="mdi:menu"
   />
-  <span class="text-gray-100 text-2xl sm:text-3xl">Labranzas</span>
+  <span class="text-gray-100 text-xl sm:text-3xl">Lab</span>
+
   <div>
+    <LoginButton client:only />
     <FavoritesButton client:only />
     <button
       class="p-2 rounded-full transition duration-300 ease-in-out hover:hover:bg-gray-600"
@@ -66,13 +69,20 @@ import FavoritesFlyout from '../FavoritesFlyout';
   const menu = document.getElementById('menu');
   const containerMenu = document.getElementById('menu-container');
   menu.addEventListener('click', () => {
-    containerMenu.classList.toggle('scale-100');
+    if (containerMenu.classList.contains('scale-100')) {
+      containerMenu.classList.remove('scale-100');
+      containerMenu.classList.add('scale-0');
+    } else {
+      containerMenu.classList.add('scale-100');
+      containerMenu.classList.remove('scale-0');
+    }
   });
   window.addEventListener('click', function (e) {
     e.preventDefault();
     if (!containerMenu.contains(e.target) && !menu.contains(e.target)) {
       if (containerMenu.classList.contains('scale-100')) {
         containerMenu.classList.remove('scale-100');
+        containerMenu.classList.add('scale-0');
       }
     }
   });
